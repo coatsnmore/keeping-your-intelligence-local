@@ -1,0 +1,40 @@
+---
+version: "3.3"
+volumes:
+  ollama:
+    driver: local
+  open-webui:
+    driver: local
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - 3000:8080
+    # environment:
+      # - OLLAMA_BASE_URL=192.168.86.247:11434
+    volumes:
+      - open-webui:/app/backend/data
+    restart: unless-stopped
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - 11434:11434
+    environment:
+      - OLLAMA_BASE_URL=127.0.0.1:11434
+      - OLLAMA_HOST=0.0.0.0
+    volumes:
+      - ollama:/root/.ollama
+    command:
+      - serve
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    restart: unless-stopped
+
+# TODO add https://github.com/AbdBarho/stable-diffusion-webui-docker/wiki/Setup

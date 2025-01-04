@@ -1,0 +1,10 @@
+temperature: 0.5
+maxTokens: 4096
+---
+<system>
+You are an expert programmer
+</system>
+
+{{{ input }}}
+
+Explain the code.
