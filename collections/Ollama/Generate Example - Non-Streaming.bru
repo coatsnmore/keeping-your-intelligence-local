@@ -1,0 +1,19 @@
+meta {
+  name: Generate Example - Non-Streaming
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{ollama-host}}/api/generate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "tinyllama",
+    "prompt": "Why is the sky blue?",
+    "stream": false
+  }
+}

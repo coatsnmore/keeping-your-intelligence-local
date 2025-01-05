@@ -1,0 +1,18 @@
+meta {
+  name: Load a Model
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{ollama-host}}/api/pull
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "tinyllama",
+    "stream": false
+  }
+}

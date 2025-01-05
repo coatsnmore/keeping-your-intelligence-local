@@ -35,13 +35,13 @@ services:
       - ollama:/root/.ollama
     command:
       - serve
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     restart: unless-stopped
 
 # TODO add https://github.com/AbdBarho/stable-diffusion-webui-docker/wiki/Setup

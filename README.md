@@ -1,26 +1,36 @@
 # Keeping Your Intelligence Local (and Cheap)
 
-## Run the Example
+## Preprequisites
+* Command Line Tools: `jq`, `bc`, `git`
+* Clone this repo with `git clone https://github.com/coatsnmore/keeping-your-intelligence-local`
+* Docker Engine
+* Docker Compose or equivalent client (e.g. `docker-compose`)
 
-1. Startup the Docker Compose stack
+## Run the Docker Compose Stack
 ```bash
 # start ollama and open webui
-docker compose -f ollama.yml up -d
+docker compose up -d
 
-# turn off when done
-docker compose -f ollama.yml down
+# check out the deployed containers
+docker ps
+
+# later, you can turn this off with
+docker compose down
 ```
 
-2. Sign up an account. This stay local. Use `admin@admin.com/admin`
-3. Admin > Settings
+## Boostrap and Test Ollama
 
-
-(First time only) Prime the pump for Ollama serving its API by bootstrapping a model
 ```bash
-docker ps -a
-docker exec -it ollama /bin/bash
-% ollama pull llama2:7b
+# boostrap Ollama by loading a model
+./bootstrap.sh
+
+# run the test script
+./test.sh
 ```
+
+## Test out Open Web UI
+1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
+1. Sign up an account. This stay local. Use `admin@admin.com/admin`
 
 ## Reasoning Test
 
@@ -29,10 +39,11 @@ docker exec -it ollama /bin/bash
 ## References
 
 ### General Knowledge
-* [Blog Article - Reasoning with Ollama](https://heidloff.net/article/reasoning-ollama/)
-* [Youtube Video - Matt Berman](https://www.youtube.com/@matthew_berman)
-* [Youtube Video - Matt Wolfe](https://www.youtube.com/@mreflow)
-* [Youtube Video - Matt Williams](https://www.youtube.com/@technovangelist)
+* [Blog - Reasoning with Ollama](https://heidloff.net/article/reasoning-ollama/)
+* [Youtube - Matt Berman](https://www.youtube.com/@matthew_berman)
+* [Youtube - Matt Wolfe](https://www.youtube.com/@mreflow)
+* [Youtube - Matt Williams](https://www.youtube.com/@technovangelist)
 
 ### Technology and Tools
+* [Ollama - API Docs](hhttps://github.com/ollama/ollama/blob/main/docs/api.md)
 * [QwQ - Qwen with Questions](https://qwenlm.github.io/blog/qwq-32b-preview/)

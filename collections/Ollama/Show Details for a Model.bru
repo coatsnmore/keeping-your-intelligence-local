@@ -1,0 +1,17 @@
+meta {
+  name: Show Details for a Model
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{ollama-host}}/api/show
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "tinyllama"
+  }
+}
