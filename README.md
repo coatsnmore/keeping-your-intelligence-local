@@ -6,6 +6,7 @@
 * Docker Engine
 * Docker Compose or equivalent client (e.g. `docker-compose`)
 * Docker Socket access (only worry about this if something breaks - OpenWebUI assumes socket access by default)
+* general HTTP egress acccess (fetches model and container binaries)
 
 ## Run the Docker Compose Stack
 ```bash
@@ -15,25 +16,44 @@ docker compose up -d
 # check out the deployed containers
 docker ps
 
-# later, you can turn this off with
+# after you are done, you can turn this off with
 docker compose down
 ```
 
-## Boostrap and Test Ollama
+## Boostrap Ollama with tinyllama
 
 ```bash
-# boostrap Ollama by loading a model
-./bootstrap.sh
+# request Ollama to pull down model
+./load-model.sh tinyllama
+```
 
-# run the test script
+## Test Basic Text Prompt against Ollama serving a Tiny Model
+```bash
+# run a prompt against tinyllama
 ./test.sh
 ```
+
+## Test Vision Model
+```bash
+# load a vision model
+./load-model.sh llava
+
+# let's look at some cats
+./cats.sh
+```
+## Strucutured Output
+json
+
+## Function Calling
+go do something
 
 ## Test out Open Web UI
 1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
 1. Sign up an account. This stays local, but use credentials you don't care about. Use `admin@admin.com/admin`
 
-## Commmon Reasoning Test
+
+
+##  Reasoning Test
 
 "Please add a pair of parentheses to the incorrect equation: 1 + 2 * 3 + 4 * 5 + 6 * 7 + 8 * 9 = 479, to make the equation true."
 
@@ -49,4 +69,3 @@ docker compose down
 * [Ollama - API Docs](hhttps://github.com/ollama/ollama/blob/main/docs/api.md)
 * [QwQ - Qwen with Questions](https://qwenlm.github.io/blog/qwq-32b-preview/)
 * [Ollama with Spring Boot](https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html#:~:text=Ollama%20is%20OpenAI%20API%2Dcompatible,openai.)
-* 
