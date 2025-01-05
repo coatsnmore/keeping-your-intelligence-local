@@ -7,7 +7,7 @@ API_URL="http://localhost:11434/api/generate"
 payload='{
   "model": "tinyllama",
   "stream": false,
-  "prompt": "If a brain in a vat can experience a fully convincing and indistinguishable simulation of reality, how can we be sure that we are not currently in such a simulation?"
+  "prompt": "What are mirror neurons and how do they relate to empathy in primates?"
 }'
 
 # Use curl to send the request and store the JSON response
@@ -27,8 +27,17 @@ prompt_response=$(echo "$response" | jq -r '.response')
 calculation_result=$(echo "scale=9; $eval_count / $eval_duration * 1000000000" | bc)
 
 # Print the results
-echo "Response: $prompt_response"
+echo "Prompt Response: -------------------------------------------"
+echo -e "$prompt_response\n"
 echo "Time to process request: $elapsed_time seconds"
 echo "Tokens: $eval_count"
 echo "Tokens/s: $calculation_result"
+
+# $1.25 / 1m input tokens (OpenAI 1/5/25)
+# $5 / 1m output tokens
+# given eval_count is a combo of input/output tokens,
+# let's assume an average of $3.125 / 1M tokens and $3.125 is about a cup of coffee 
+times_to_coffee=$(echo "scale=9; 1000000 / $eval_count" | bc)
+echo "TTS (Time to Coffee): $times_to_coffee"
+
 
