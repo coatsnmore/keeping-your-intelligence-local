@@ -7,13 +7,17 @@ start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
 
 model="llava"
 prompt="What is going on in this picture?"
-cats=$(base64 -i cats.jpeg -o -)
-payload="{
-  \"model\": \"${model}\",
-  \"stream\": false,
-  \"prompt\": \"${prompt}\",
-  \"images\": [\"${cats}\"]
-}"
+cats=$(base64 cats.jpeg) # beware that base64 may work differently per OS/shell
+payload=$(jq -n --arg model "$model" \
+                  --arg prompt "$prompt" \
+                  --arg cats "$cats" \
+                  '{
+                      model: $model,
+                      stream: false,
+                      prompt: $prompt,
+                      images: [$cats]
+                  }')
+# echo $payload
 
 response=$(curl -s -X POST "$API_URL" -d "$payload")
 
@@ -41,6 +45,6 @@ echo "Tokens/s: $calculation_result"
 # given eval_count is a combo of input/output tokens,
 # let's assume an average of $3.125 / 1M tokens and $3.125 is about a cup of coffee 
 times_to_coffee=$(echo "scale=9; 1000000 / $eval_count" | bc)
-echo "TTS (Time to Coffee): $times_to_coffee"
+echo "TTC (Time to Coffee): $times_to_coffee"
 
 

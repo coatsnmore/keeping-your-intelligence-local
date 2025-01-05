@@ -39,6 +39,6 @@ echo "Tokens/s: $calculation_result"
 # given eval_count is a combo of input/output tokens,
 # let's assume an average of $3.125 / 1M tokens and $3.125 is about a cup of coffee 
 times_to_coffee=$(echo "scale=9; 1000000 / $eval_count" | bc)
-echo "TTS (Time to Coffee): $times_to_coffee"
+echo "TTC (Time to Coffee): $times_to_coffee"
 
 

@@ -2,7 +2,6 @@
 
 ## Preprequisites
 * Command Line Tools: `jq`, `bc`, `git`, `base64`
->Hint: Mac users can `brew update && brew install jq bc git base64`
 * Clone this repo with `git clone https://github.com/coatsnmore/keeping-your-intelligence-local`
 * Docker Engine
 * Docker Compose or equivalent client (e.g. `docker-compose`)
