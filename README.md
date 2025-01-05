@@ -41,7 +41,7 @@ docker compose down
 # let's look at some cats
 ./cats.sh
 ```
-## Strucutured Output
+## Structured Output for Function Calling
 
 ```bash
 # get some valid JSON
@@ -51,14 +51,9 @@ docker compose down
 cat structured-request.json
 ```
 
-## Function Calling
-go do something
-
 ## Test out Open Web UI
 1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
 1. Sign up an account. This stays local, but use credentials you don't care about. Use `admin@admin.com/admin`
-
-
 
 ##  Reasoning Test
 
@@ -76,3 +71,4 @@ go do something
 * [Ollama - API Docs](hhttps://github.com/ollama/ollama/blob/main/docs/api.md)
 * [QwQ - Qwen with Questions](https://qwenlm.github.io/blog/qwq-32b-preview/)
 * [Ollama with Spring Boot](https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html#:~:text=Ollama%20is%20OpenAI%20API%2Dcompatible,openai.)
+* [Ollama Function Calling aka Format JSON](https://www.youtube.com/watch?v=RXDWkiuXtG0)
