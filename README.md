@@ -5,6 +5,7 @@
 * Clone this repo with `git clone https://github.com/coatsnmore/keeping-your-intelligence-local`
 * Docker Engine
 * Docker Compose or equivalent client (e.g. `docker-compose`)
+* Docker Socket access (only worry about this if something breaks - OpenWebUI assumes socket access by default)
 
 ## Run the Docker Compose Stack
 ```bash
@@ -30,9 +31,10 @@ docker compose down
 
 ## Test out Open Web UI
 1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
-1. Sign up an account. This stay local. Use `admin@admin.com/admin`
+1. Sign up an account. This stays local, but use credentials you don't care about. Use `admin@admin.com/admin`
 
-## Reasoning Test
+
+## Commmon Reasoning Test
 
 "Please add a pair of parentheses to the incorrect equation: 1 + 2 * 3 + 4 * 5 + 6 * 7 + 8 * 9 = 479, to make the equation true."
 

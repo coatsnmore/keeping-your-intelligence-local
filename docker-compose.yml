@@ -1,7 +1,7 @@
 ---
 networks:
   ollama-network:
-    # external: true
+    # external: true # only comment out if you want others in your business
     name: ollama-network
 volumes:
   ollama:
@@ -17,7 +17,7 @@ services:
     ports:
       - 3000:8080
     # environment:
-    #   - OLLAMA_BASE_URL=192.168.86.247:11434
+    #   - OLLAMA_BASE_URL=NETWORK_ADDRESS:11434 # for others to consume
     volumes:
       - open-webui:/app/backend/data
     restart: unless-stopped
@@ -28,9 +28,6 @@ services:
     container_name: ollama
     ports:
       - 11434:11434
-    # environment:
-    #   - OLLAMA_BASE_URL=127.0.0.1:11434
-    #   - OLLAMA_HOST=0.0.0.0
     volumes:
       - ollama:/root/.ollama
     command:
