@@ -33,7 +33,6 @@ docker compose down
 1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
 1. Sign up an account. This stays local, but use credentials you don't care about. Use `admin@admin.com/admin`
 
-
 ## Commmon Reasoning Test
 
 "Please add a pair of parentheses to the incorrect equation: 1 + 2 * 3 + 4 * 5 + 6 * 7 + 8 * 9 = 479, to make the equation true."
