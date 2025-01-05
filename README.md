@@ -2,12 +2,24 @@
 
 ## Run the Example
 
+1. Startup the Docker Compose stack
 ```bash
 # start ollama and open webui
 docker compose -f ollama.yml up -d
 
 # turn off when done
 docker compose -f ollama.yml down
+```
+
+2. Sign up an account. This stay local. Use `admin@admin.com/admin`
+3. Admin > Settings
+
+
+(First time only) Prime the pump for Ollama serving its API by bootstrapping a model
+```bash
+docker ps -a
+docker exec -it ollama /bin/bash
+% ollama pull llama2:7b
 ```
 
 ## Reasoning Test
