@@ -7,7 +7,9 @@ start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
 
 model="llava"
 prompt="What is going on in this picture?"
-cats=$(base64 cats.jpeg) # beware that base64 may work differently per OS/shell
+# cats=$(base64 cats.jpeg) # beware that base64 may work differently per OS/shell
+cats=$(cat cats.base64)
+
 payload=$(jq -n --arg model "$model" \
                   --arg prompt "$prompt" \
                   --arg cats "$cats" \
