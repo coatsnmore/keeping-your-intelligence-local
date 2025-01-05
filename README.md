@@ -1,7 +1,7 @@
 # Keeping Your Intelligence Local (and Cheap)
 
 ## Preprequisites
-* Command Line Tools: `jq`, `bc`, `git`
+* Command Line Tools: `jq`, `bc`, `git`, `base64`
 * Clone this repo with `git clone https://github.com/coatsnmore/keeping-your-intelligence-local`
 * Docker Engine
 * Docker Compose or equivalent client (e.g. `docker-compose`)
