@@ -42,7 +42,14 @@ docker compose down
 ./cats.sh
 ```
 ## Strucutured Output
-json
+
+```bash
+# get some valid JSON
+./structured.sh
+
+# inspect the request payload
+cat structured-request.json
+```
 
 ## Function Calling
 go do something
