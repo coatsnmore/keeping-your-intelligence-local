@@ -48,3 +48,5 @@ docker compose down
 ### Technology and Tools
 * [Ollama - API Docs](hhttps://github.com/ollama/ollama/blob/main/docs/api.md)
 * [QwQ - Qwen with Questions](https://qwenlm.github.io/blog/qwq-32b-preview/)
+* [Ollama with Spring Boot](https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html#:~:text=Ollama%20is%20OpenAI%20API%2Dcompatible,openai.)
+* 
