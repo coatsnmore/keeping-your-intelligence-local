@@ -3,15 +3,17 @@
 # Define the API URL
 API_URL="http://localhost:11434/api/generate"
 
-# Define the request payload
-payload='{
-  "model": "tinyllama",
-  "stream": false,
-  "prompt": "What are mirror neurons and how do they relate to empathy in primates?"
-}'
-
-# Use curl to send the request and store the JSON response
 start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
+
+model="llava"
+prompt="What is going on in this picture?"
+cats=$(base64 -i cats.jpeg -o -)
+payload="{
+  \"model\": \"${model}\",
+  \"stream\": false,
+  \"prompt\": \"${prompt}\",
+  \"images\": [\"${cats}\"]
+}"
 
 response=$(curl -s -X POST "$API_URL" -d "$payload")
 
