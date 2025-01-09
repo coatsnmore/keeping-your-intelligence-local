@@ -51,6 +51,15 @@ docker compose down
 cat structured-request.json
 ```
 
+## Embeddings
+
+```bash
+# load the embedding model
+./load-model.sh all-minilm
+
+# create an embedding from a local file
+./embed.sh
+```
 ## Test out Open Web UI
 1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
 1. Sign up an account. This stays local, but use credentials you don't care about. Use `admin@admin.com/admin`
