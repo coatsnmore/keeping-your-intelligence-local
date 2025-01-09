@@ -13,6 +13,7 @@ end_time=$(date +%s)  # Record end time in seconds
 elapsed_time=$((end_time - start_time))  # Time in seconds
 
 # Extract values from the response using jq
+prompt_eval_count=$(echo "$response" | jq -r '.prompt_eval_count')
 eval_count=$(echo "$response" | jq -r '.eval_count')
 eval_duration=$(echo "$response" | jq -r '.eval_duration')
 prompt_response=$(echo "$response" | jq -r '.response')
@@ -32,7 +33,7 @@ echo "Tokens/s: $calculation_result"
 # $5 / 1m output tokens
 # given eval_count is a combo of input/output tokens,
 # let's assume an average of $3.125 / 1M tokens and $3.125 is about a cup of coffee 
-times_to_coffee=$(echo "scale=9; 1000000 / $eval_count" | bc)
+times_to_coffee=$(echo "scale=9; 1000000 / ($eval_count + $prompt_eval_count)" | bc)
 echo "TTC (Time to Coffee): $times_to_coffee"
 
 
