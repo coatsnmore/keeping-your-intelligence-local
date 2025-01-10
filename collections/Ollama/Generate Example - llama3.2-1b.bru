@@ -1,0 +1,19 @@
+meta {
+  name: Generate Example - llama3.2-1b
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{ollama-host}}/api/generate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "llama3.2:1b",
+    "prompt": "What are mirror neurons and how do they relate to empathy in primates?",
+    "stream": false
+  }
+}

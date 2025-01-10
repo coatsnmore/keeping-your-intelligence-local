@@ -1,14 +1,31 @@
 #!/bin/bash
 
+# Check if an argument is provided
+if [ -z "$1" ]; then
+    echo "No model provided. Usage: ./test.sh <model>"
+    exit 1
+fi
+
+model="$1"
+
 # Define the API URL
 API_URL="http://localhost:11434/api/generate"
 
 # Define the request payload
-payload='{
-  "model": "tinyllama",
-  "stream": false,
-  "prompt": "What are mirror neurons and how do they relate to empathy in primates?"
-}'
+# payload='{
+#   "model": "tinyllama",
+#   "stream": false,
+#   "prompt": "What are mirror neurons and how do they relate to empathy in primates?"
+# }'
+
+prompt="What are mirror neurons and how do they relate to empathy in primates?"
+payload=$(jq -n --arg model "$model" \
+                --arg prompt "$prompt" \
+                '{
+                    model: $model,
+                    stream: false,
+                    prompt: $prompt
+                }')
 
 # Use curl to send the request and store the JSON response
 start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)

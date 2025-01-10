@@ -30,10 +30,21 @@ docker compose down
 ## Test Basic Text Prompt against Ollama serving a Tiny Model
 ```bash
 # run a prompt against tinyllama
-./test.sh
+./test.sh tinyllama
+```
+
+## (Optional) Test a Slightly More Capable Model
+
+```bash
+# load llama3
+./load-model.sh llama3.2:1b
+
+# test llama3
+./test.sh llama3.2:1b
 ```
 
 ## Test Vision Model
+
 ```bash
 # load a vision model
 ./load-model.sh llava
@@ -41,6 +52,7 @@ docker compose down
 # let's look at some cats
 ./cats.sh
 ```
+
 ## Structured Output for Function Calling
 
 ```bash
