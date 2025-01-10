@@ -2,7 +2,7 @@
 
 # Check if an argument is provided
 if [ -z "$1" ]; then
-    echo "No model provided. Usage: ./cats.sh <model>"
+    echo "No model provided. Usage: ./code.sh <model>"
     exit 1
 fi
 
@@ -11,34 +11,33 @@ model="$1"
 # Define the API URL
 API_URL="http://localhost:11434/api/generate"
 
-start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
+# Define the request payload
+# payload='{
+#   "model": "tinyllama",
+#   "stream": false,
+#   "prompt": "What are mirror neurons and how do they relate to empathy in primates?"
+# }'
 
-# model="llava"
-prompt="What is going on in this picture?"
-# cats=$(base64 cats.jpeg) # beware that base64 may work differently per OS/shell
-cats=$(cat cats.base64)
-
+prompt="Generate me a valid python script using only built in libraries that says hello world and prints out the local time. Only output valid Python. Do not include any other words or explanation."
 payload=$(jq -n --arg model "$model" \
                 --arg prompt "$prompt" \
-                --arg cats "$cats" \
                 '{
                     model: $model,
                     stream: false,
-                    prompt: $prompt,
-                    images: [$cats]
+                    prompt: $prompt
                 }')
-# echo $payload
+
+# Use curl to send the request and store the JSON response
+start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
 
 response=$(curl -s -X POST "$API_URL" -d "$payload")
-
-# echo "response: ${response}"
 
 end_time=$(date +%s)  # Record end time in seconds
 elapsed_time=$((end_time - start_time))  # Time in seconds
 
 # Extract values from the response using jq
-prompt_eval_count=$(echo "$response" | jq -r '.prompt_eval_count')
 eval_count=$(echo "$response" | jq -r '.eval_count')
+prompt_eval_count=$(echo "$response" | jq -r '.prompt_eval_count')
 eval_duration=$(echo "$response" | jq -r '.eval_duration')
 prompt_response=$(echo "$response" | jq -r '.response')
 

@@ -1,0 +1,17 @@
+meta {
+  name: Delete a Model
+  type: http
+  seq: 10
+}
+
+delete {
+  url: {{ollama-host}}/api/delete
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "llama3.3"
+  }
+}
