@@ -17,8 +17,8 @@ API_URL="http://localhost:11434/api/generate"
 #   "stream": false,
 #   "prompt": "What are mirror neurons and how do they relate to empathy in primates?"
 # }'
-template="<|im_start|>system\nRespond only with the requested code. Do not include any explanation, comments, or additional text.\n<|im_end|>{{ if .Prompt }}<|im_start|>user\n{{ .Prompt }}\n<|im_end|>{{ end }}<|im_start|>assistant\n{{ .Response }}<|im_end|>"
-prompt="Generate me a valid python script using only built in libraries that says hello world and prints out the local time. Only output valid Python. Do not include any other words or explanation."
+template="<|im_start|>system\nRespond only with the requested code. Do not include any explanation, comments, or additional text. Do not include any other text than the valid Python file. Do not include wrapping markdown code fences. \n<|im_end|>{{ if .Prompt }}<|im_start|>user\n{{ .Prompt }}\n<|im_end|>{{ end }}<|im_start|>assistant\n{{ .Response }}<|im_end|>"
+prompt="Write me a Python script that only uses built-in libraries that says hello world and prints the local date. Only response with a valid Python file. Do not include any other text than the valid Python file. Do not include wrapping markdown code fences. For example \"python\nfrom datetime import datetime\nprint(\"Hello World\")\nprint(datetime.now())\n\""
 payload=$(jq -n --arg model "$model" \
                 --arg prompt "$prompt" \
                 --arg template "$template" \
