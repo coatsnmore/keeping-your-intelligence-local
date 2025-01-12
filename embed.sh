@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Define the API URL
-API_URL="http://localhost:11434/api/embed"
+# API_URL="http://localhost:11434/api/embed"
+API_URL="ollama:11434/api/embed"
 
 start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
 

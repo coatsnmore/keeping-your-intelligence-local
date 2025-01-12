@@ -8,7 +8,8 @@ fi
 
 model="$1"
 
-OLLAMA_ENDPOINT=http://localhost:11434
+# OLLAMA_ENDPOINT=http://localhost:11434
+OLLAMA_ENDPOINT=ollama:11434
 
 # define the payload with jq
 payload=$(jq -n --arg model "$model" \

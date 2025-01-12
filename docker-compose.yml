@@ -35,10 +35,10 @@ services:
       - ollama:/root/.ollama
     command:
       - serve
-    deploy:
-      resources:
-        limits:
-          memory: 4g
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 4g
     #     reservations:
     #       devices:
     #         - driver: nvidia
