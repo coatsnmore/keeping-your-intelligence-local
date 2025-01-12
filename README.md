@@ -3,11 +3,17 @@
 ## Preprequisites
 
 * Command Line Tools (only if you don't use Docker): `jq`, `bc`, `git`, `base64`
-* Clone this repo with `git clone https://github.com/coatsnmore/keeping-your-intelligence-local`
 * Docker Engine (or Podman)
 * Docker Compose or equivalent client (e.g. `docker-compose`, `podman`)
 * Docker Socket access (only worry about this if something breaks - OpenWebUI assumes socket access by default)
 * general HTTP egress acccess (fetches model and container binaries)
+
+## Clone the Repo
+
+```bash
+# Clone this repo with 
+git clone https://github.com/coatsnmore/keeping-your-intelligence-local
+```
 
 ## Run the Docker Compose Stack and Attach to the Workspace Container
 
