@@ -9,7 +9,8 @@ fi
 model="$1"
 
 # Define the API URL
-API_URL="http://localhost:11434/api/generate"
+# API_URL="http://localhost:11434/api/generate"
+API_URL="ollama:11434/api/generate"
 
 start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
 
@@ -31,7 +32,7 @@ payload=$(jq -n --arg model "$model" \
 
 response=$(curl -s -X POST "$API_URL" -d "$payload")
 
-# echo "response: ${response}"
+echo "response: ${response}"
 
 end_time=$(date +%s)  # Record end time in seconds
 elapsed_time=$((end_time - start_time))  # Time in seconds

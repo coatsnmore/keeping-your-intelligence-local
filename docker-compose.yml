@@ -6,6 +6,7 @@ networks:
 volumes:
   ollama:
     driver: local
+    # external: true
   open-webui:
     driver: local
 services:
@@ -26,19 +27,41 @@ services:
     networks:
       - ollama-network
     container_name: ollama
+    # mem_limit: 2g  # Limit container memory usage to 2 GiB
+    # mem_reservation: 1g  # Reserve 1 GiB of memory for the container
     ports:
       - 11434:11434
     volumes:
       - ollama:/root/.ollama
     command:
       - serve
-    # deploy:
-    #   resources:
+    deploy:
+      resources:
+        limits:
+          memory: 4g
     #     reservations:
     #       devices:
     #         - driver: nvidia
     #           count: all
     #           capabilities: [gpu]
     restart: unless-stopped
+  intelligence:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: intelligence:1
+    container_name: intelligence
+    networks:
+      - ollama-network
+    volumes:
+      - .:/app
+      # - /app/node_modules     # Prevent overwriting node_modules (if using Node.js)
+    # ports:
+    #   - "3000:3000"           # Expose a port (e.g., for a web server or API)
+    # environment:
+    #   - NODE_ENV=development  # Example environment variable (customize for your app)
+    command: /bin/bash -c "tail -f /dev/null"
+    restart: unless-stopped
+
 
 # TODO add https://github.com/AbdBarho/stable-diffusion-webui-docker/wiki/Setup

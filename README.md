@@ -10,14 +10,17 @@
 
 ## Run the Docker Compose Stack
 ```bash
-# start ollama and open webui
-docker compose up -d
+# start ollama, open webui, and a shell environment with some tooling
+docker compose up --build -d
 
 # check out the deployed containers
 docker ps
 
+# attach to the intelligence container
+docker exec -it intelligence /bin/bash
+
 # after you are done, you can turn this off with
-docker compose down
+# docker compose down
 ```
 
 ## Boostrap Ollama with tinyllama
@@ -93,3 +96,11 @@ cat structured-request.json
 * [QwQ - Qwen with Questions](https://qwenlm.github.io/blog/qwq-32b-preview/)
 * [Ollama with Spring Boot](https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html#:~:text=Ollama%20is%20OpenAI%20API%2Dcompatible,openai.)
 * [Ollama Function Calling aka Format JSON](https://www.youtube.com/watch?v=RXDWkiuXtG0)
+
+
+## Some Common Issues
+
+```bash
+# clean it up
+sudo docker system prune --all --volumes`
+```
