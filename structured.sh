@@ -1,6 +1,7 @@
 #!/bin/bash
 
-API_URL="http://localhost:11434/api/generate"
+# API_URL="http://localhost:11434/api/generate"
+API_URL="ollama:11434/api/generate"
 
 payload="$(cat structured-request.json)"
 

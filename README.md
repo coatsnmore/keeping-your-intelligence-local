@@ -1,23 +1,28 @@
 # Keeping Your Intelligence Local (and Cheap)
 
 ## Preprequisites
-* Command Line Tools: `jq`, `bc`, `git`, `base64`
+
+* Command Line Tools (only if you don't use Docker): `jq`, `bc`, `git`, `base64`
 * Clone this repo with `git clone https://github.com/coatsnmore/keeping-your-intelligence-local`
-* Docker Engine
-* Docker Compose or equivalent client (e.g. `docker-compose`)
+* Docker Engine (or Podman)
+* Docker Compose or equivalent client (e.g. `docker-compose`, `podman`)
 * Docker Socket access (only worry about this if something breaks - OpenWebUI assumes socket access by default)
 * general HTTP egress acccess (fetches model and container binaries)
 
-## Run the Docker Compose Stack
+## Run the Docker Compose Stack and Attach to the Workspace Container
+
 ```bash
-# start ollama and open webui
-docker compose up -d
+# start ollama, open webui, and a shell environment with some tooling
+docker compose up --build -d
 
 # check out the deployed containers
 docker ps
 
+# attach to the intelligence container
+docker exec -it intelligence /bin/bash
+
 # after you are done, you can turn this off with
-docker compose down
+# docker compose down
 ```
 
 ## Boostrap Ollama with tinyllama
@@ -73,6 +78,7 @@ cat structured-request.json
 ./embed.sh
 ```
 ## Test out Open Web UI
+
 1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
 1. Sign up an account. This stays local, but use credentials you don't care about. Use `admin@admin.com/admin`
 
@@ -83,13 +89,23 @@ cat structured-request.json
 ## References
 
 ### General Knowledge
+
 * [Blog - Reasoning with Ollama](https://heidloff.net/article/reasoning-ollama/)
 * [Youtube - Matt Berman](https://www.youtube.com/@matthew_berman)
 * [Youtube - Matt Wolfe](https://www.youtube.com/@mreflow)
 * [Youtube - Matt Williams](https://www.youtube.com/@technovangelist)
 
 ### Technology and Tools
+
 * [Ollama - API Docs](hhttps://github.com/ollama/ollama/blob/main/docs/api.md)
 * [QwQ - Qwen with Questions](https://qwenlm.github.io/blog/qwq-32b-preview/)
 * [Ollama with Spring Boot](https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html#:~:text=Ollama%20is%20OpenAI%20API%2Dcompatible,openai.)
 * [Ollama Function Calling aka Format JSON](https://www.youtube.com/watch?v=RXDWkiuXtG0)
+
+
+## Some Common Issues
+
+```bash
+# clean it up
+sudo docker system prune --all --volumes`
+```

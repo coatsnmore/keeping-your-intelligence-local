@@ -1,4 +1,6 @@
 #!/bin/bash
+# HOST=localhost
+HOST=ollama
 
 # Check if an argument is provided
 if [ -z "$1" ]; then
@@ -9,7 +11,8 @@ fi
 model="$1"
 
 # Define the API URL
-API_URL="http://localhost:11434/api/generate"
+# API_URL="http://localhost:11434/api/generate"
+API_URL="ollama:11434/api/generate"
 
 # Define the request payload
 # payload='{
@@ -31,6 +34,8 @@ payload=$(jq -n --arg model "$model" \
 start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
 
 response=$(curl -s -X POST "$API_URL" -d "$payload")
+
+echo "response: ${response}"
 
 end_time=$(date +%s)  # Record end time in seconds
 elapsed_time=$((end_time - start_time))  # Time in seconds
