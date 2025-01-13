@@ -1,0 +1,13 @@
+# Enforce LF line endings for all text files
+* text=auto eol=lf
+
+# Ensure specific file types always use LF
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.py text eol=lf
+
+# Keep binary files untouched
+*.png binary
+*.jpg binary
+*.zip binary
