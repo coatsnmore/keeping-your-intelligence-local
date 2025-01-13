@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # HOST=localhost
 HOST=ollama
 

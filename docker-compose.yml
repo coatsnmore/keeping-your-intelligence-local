@@ -54,7 +54,8 @@ services:
     networks:
       - ollama-network
     volumes:
-      - .:/app
+      # - .:/app
+      - /c/devl/keeping-your-intelligence-local:/app
       # - /app/node_modules     # Prevent overwriting node_modules (if using Node.js)
     # ports:
     #   - "3000:3000"           # Expose a port (e.g., for a web server or API)
