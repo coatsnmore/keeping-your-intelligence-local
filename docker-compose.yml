@@ -62,6 +62,16 @@ services:
     #   - NODE_ENV=development  # Example environment variable (customize for your app)
     command: /bin/bash -c "tail -f /dev/null"
     restart: unless-stopped
+  vector:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: rag-example
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    networks:
+      - ollama-network
 
 
 # TODO add https://github.com/AbdBarho/stable-diffusion-webui-docker/wiki/Setup
