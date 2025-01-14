@@ -1,6 +1,6 @@
 {
     "model": "tinyllama",
-    "prompt": "Tell me about interesting events in history where two countries agreed on something with mutual benefit.",
+    "prompt": "Tell me about 10 interesting events in history where two countries agreed on something with mutual benefit. Each event should include: date, location, name, details.",
     "stream": false,
     "format": {
         "$id": "https://example.com/arrays.schema.json",
@@ -27,11 +27,11 @@
                     "type": "string",
                     "description": "The location of the event"
                     },
-                    "event": {
+                    "name": {
                     "type": "string",
                     "description": "A brief title for the event"
                     },
-                    "description": {
+                    "details": {
                     "type": "string",
                     "description": "A short description of the event. Includes a brief justification of why it is interesting."
                     }   
