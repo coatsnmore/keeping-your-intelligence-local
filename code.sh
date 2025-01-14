@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# Check if an argument is provided
-if [ -z "$1" ]; then
-    echo "No model provided. Usage: ./code.sh <model>"
-    exit 1
-fi
+# # Check if an argument is provided
+# if [ -z "$1" ]; then
+#     echo "No model provided. Usage: ./code.sh <model>"
+#     exit 1
+# fi
 
-model="$1"
+# model="$1"
+model=qwen2.5-coder:0.5b
 
 # Define the API URL
 API_URL="http://localhost:11434/api/generate"
