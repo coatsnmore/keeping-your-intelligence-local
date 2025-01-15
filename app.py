@@ -1,5 +1,3 @@
-import time
+import datetime
 
-current_time = time.strftime("%Y-%m-%d %H:%M:%S")
-
-print(current_time)
+print(datetime.datetime.now())
