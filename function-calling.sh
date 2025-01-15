@@ -5,6 +5,8 @@ API_URL="ollama:11434/api/generate"
 
 payload="$(cat function-calling.json)"
 
+echo "payload: ${payload}"
+
 # Use curl to send the request and store the JSON response
 start_time=$(date +%s)  # Record start time in seconds (not nanoseconds)
 

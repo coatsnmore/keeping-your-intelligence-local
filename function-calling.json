@@ -1,41 +1,21 @@
 {
     "model": "tinyllama",
-    "prompt": "Tell me about 10 interesting events in history where two countries agreed on something with mutual benefit. Each event should include: date, location, name, details.",
+    "prompt": "There are three functions in the form of <function_name>(<parameter>): [1. hello(name) 2. find(address) 3. buy(goods)]. If we want to buy some goods, what should I do? Include <function_name> and <parameter>.",
     "stream": false,
     "format": {
-        "$id": "https://example.com/arrays.schema.json",
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "description": "Interesting Events",
-        "title": "Events",
+        "required": [
+            "function_name",
+            "parameter"
+          ],
         "type": "object",
         "properties": {
-            "events": {
-            "type": "array",
-            "items": { "$ref": "#/$defs/event" }
-            }
-        },
-        "$defs": {
-            "event": {
-                "type": "object",
-                "required": ["date", "location" , "event"],
-                "properties": {
-                    "date": {
-                    "type": "string",
-                    "description": "The date of the event"
-                    },
-                    "location": {
-                    "type": "string",
-                    "description": "The location of the event"
-                    },
-                    "name": {
-                    "type": "string",
-                    "description": "A brief title for the event"
-                    },
-                    "details": {
-                    "type": "string",
-                    "description": "A short description of the event. Includes a brief justification of why it is interesting."
-                    }   
-                }
+            "function_name": {
+                "type": "string",
+                "description": "The name of the function"
+            },
+            "parameter": {
+                "type": "string",
+                "description": "The parameter of the function"
             }
         }
     }     
