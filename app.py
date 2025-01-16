@@ -1,5 +1,1 @@
-import datetime
-
-print(datetime.datetime.now())
-
-# Add your code here
+from datetime import datetime\nimport time\nlocal_time = datetime.now()\nprint(local_time.strftime('%Y-%m-%d %H:%M:%S'))\n\n# Or using the 'time' library directly:\ntime.sleep(1)\nhello_world()

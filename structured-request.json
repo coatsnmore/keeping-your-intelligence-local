@@ -17,7 +17,7 @@
         "$defs": {
             "event": {
                 "type": "object",
-                "required": ["date", "location" , "name", "detals"],
+                "required": ["date", "location" , "name", "details"],
                 "properties": {
                     "date": {
                     "type": "string",
