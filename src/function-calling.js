@@ -8,7 +8,7 @@ const model = checkModelArgument();
 async function runFunctionTest() {
     try {
         // Read the function calling JSON data
-        const functionData = await fs.readFile('function-calling.json', 'utf-8');
+        const functionData = await fs.readFile('requests/function-calling.json', 'utf-8');
         const payload = JSON.parse(functionData);
         
         // Ensure the model from command line is used

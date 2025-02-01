@@ -18,9 +18,9 @@ async function inspectModel() {
         const data = await response.json();
         console.log(JSON.stringify(data, null, 2));
         
-        if (data.model_info) {
-            console.log('\nContext Length:', data.model_info.context_length);
-        }
+        // if (data.model_info) {
+        //     console.log('\nContext Length:', data.model_info.context_length);
+        // }
     } catch (error) {
         console.error('Error:', error);
         process.exit(1);

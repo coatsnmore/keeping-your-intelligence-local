@@ -5,26 +5,22 @@ import fs from 'fs/promises';
 
 const model = checkModelArgument();
 
-async function runImageTest() {
+async function runStructuredTest() {
     try {
-        // Read the base64 image data
-        const imageData = await fs.readFile('cats.base64', 'utf-8');
+        // Read the structured request JSON data
+        const structuredData = await fs.readFile('requests/structured-request.json', 'utf-8');
+        const payload = JSON.parse(structuredData);
         
-        const payload = {
-            model: model,
-            stream: false,
-            prompt: "What is going on in this picture?",
-            images: [imageData.trim()]
-        };
-
+        // Ensure the model from command line is used
+        payload.model = model;
+        
         const { data, elapsedTime } = await makeOllamaRequest(payload);
         console.log("response:", data);
         printResults(data, elapsedTime);
-
     } catch (error) {
         console.error('Error:', error);
         process.exit(1);
     }
 }
 
-runImageTest(); 
+runStructuredTest(); 

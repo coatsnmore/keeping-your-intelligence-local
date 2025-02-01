@@ -12,6 +12,7 @@ volumes:
 services:
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
+    pull_policy: always
     networks:
       - ollama-network
     container_name: open-webui
@@ -24,6 +25,7 @@ services:
     restart: unless-stopped
   ollama:
     image: ollama/ollama
+    pull_policy: always
     networks:
       - ollama-network
     container_name: ollama

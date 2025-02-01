@@ -1,0 +1,19 @@
+meta {
+  name: Version
+  type: http
+  seq: 14
+}
+
+get {
+  url: http://localhost:11434/api/version
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "model": "all-minilm",
+      "prompt": "whatever",
+      "stream": false
+  }
+}
