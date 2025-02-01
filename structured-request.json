@@ -1,6 +1,6 @@
 {
     "model": "tinyllama",
-    "prompt": "Tell me about interesting events in history where two countries agreed on something with mutual benefit.",
+    "prompt": "Tell me about interesting events in history where two countries agreed on something with mutual benefit. Respond using JSON",
     "stream": false,
     "format": {
         "$id": "https://example.com/arrays.schema.json",
@@ -20,23 +20,24 @@
                 "required": ["date", "location" , "event"],
                 "properties": {
                     "date": {
-                    "type": "string",
-                    "description": "The date of the event"
+                        "type": "string",
+                        "description": "The date of the event"
                     },
                     "location": {
-                    "type": "string",
-                    "description": "The location of the event"
+                        "type": "string",
+                        "description": "The location of the event"
                     },
                     "event": {
-                    "type": "string",
-                    "description": "A brief title for the event"
+                        "type": "string",
+                        "description": "A brief title for the event"
                     },
                     "description": {
-                    "type": "string",
-                    "description": "A short description of the event. Includes a brief justification of why it is interesting."
+                        "type": "string",
+                        "description": "A short description of the event. Includes a brief justification of why it is interesting."
                     }   
                 }
             }
         }
     }     
 }
+
