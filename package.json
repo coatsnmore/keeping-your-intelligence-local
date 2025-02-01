@@ -6,7 +6,11 @@
   "scripts": {
     "test": "node test.js",
     "start": "node test.js",
-    "cats": "node cats.js"
+    "cats": "node cats.js",
+    "function": "node function-calling.js",
+    "inspect": "node inspect.js",
+    "load": "node load-model.js",
+    "structured": "node structured.js"
   },
   "keywords": [
     "ollama",
