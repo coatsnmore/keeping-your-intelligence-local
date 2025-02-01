@@ -1,6 +1,6 @@
 {
     "model": "tinyllama",
-    "prompt": "Tell me about interesting events in history where two countries agreed on something with mutual benefit. Respond using JSON",
+    "prompt": "Tell me about 10 interesting events in history where two countries agreed on something with mutual benefit. Each event should include: date, location, name, details. Respond using JSON",
     "stream": false,
     "format": {
         "$id": "https://example.com/arrays.schema.json",
@@ -17,7 +17,7 @@
         "$defs": {
             "event": {
                 "type": "object",
-                "required": ["date", "location" , "event"],
+                "required": ["date", "location" , "name", "details"],
                 "properties": {
                     "date": {
                         "type": "string",
@@ -27,13 +27,13 @@
                         "type": "string",
                         "description": "The location of the event"
                     },
-                    "event": {
-                        "type": "string",
-                        "description": "A brief title for the event"
+                    "name": {
+                    "type": "string",
+                    "description": "A brief title for the event"
                     },
-                    "description": {
-                        "type": "string",
-                        "description": "A short description of the event. Includes a brief justification of why it is interesting."
+                    "details": {
+                    "type": "string",
+                    "description": "A short description of the event. Includes a brief justification of why it is interesting."
                     }   
                 }
             }

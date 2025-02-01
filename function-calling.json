@@ -1,0 +1,22 @@
+{
+    "model": "tinyllama",
+    "prompt": "There are three functions in the form of <function_name>(<parameter>): [1. hello(name) 2. find(address) 3. buy(goods)]. If we want to buy some goods, what should I do? Include <function_name> and <parameter>.",
+    "stream": false,
+    "format": {
+        "required": [
+            "function_name",
+            "parameter"
+          ],
+        "type": "object",
+        "properties": {
+            "function_name": {
+                "type": "string",
+                "description": "The name of the function"
+            },
+            "parameter": {
+                "type": "string",
+                "description": "The parameter of the function"
+            }
+        }
+    }     
+}
