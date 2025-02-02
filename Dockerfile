@@ -6,7 +6,18 @@ RUN apk update && apk add --no-cache \
     curl \
     wget \
     bc \
-    jq
+    jq \
+    python3 \
+    py3-pip \
+    py3-pylint
+
+# Create python symlink
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+
+
+# Install pylint and create python symlink
+# RUN pip3 install pylint && \
+#     ln -sf /usr/bin/python3 /usr/bin/python
 
 # Set working directory
 WORKDIR /app
