@@ -42,18 +42,19 @@ export function printResults(data, elapsedTime) {
     const eval_count = data.eval_count || data.prompt_eval_count || 0;
     const prompt_eval_count = data.prompt_eval_count || 0;
     
-    // Calculate tokens per second
-    const eval_duration = data.eval_duration || 1;  // Prevent division by zero
-    const calculationResult = eval_count / eval_duration * 1000000000;
+    // Calculate tokens per second (using wall clock time for more accurate real-world measurement)
+    const tokensPerSecond = eval_count / parseFloat(elapsedTime);
     
     // Calculate time to coffee ($3.125 per 1M tokens)
-    const timesToCoffee = 1000000 / (eval_count + prompt_eval_count);
+    // How many more requests like this one would we need to reach 1M tokens
+    const totalTokens = eval_count + prompt_eval_count;
+    const timesToCoffee = totalTokens > 0 ? (1000000 / totalTokens) : 0;
 
     console.log(chalk.blue.bold("\n-------------------------------------------"));
     console.log(chalk.cyan(`Time to process request: ${chalk.green(elapsedTime)} seconds`));
     console.log(chalk.yellow(`Tokens: ${chalk.green(eval_count || 0)}`));
-    console.log(chalk.magenta(`Tokens/s: ${chalk.green(calculationResult.toFixed(2))}`));
-    console.log(chalk.blue(`TTC (Time to Coffee): ${chalk.green(timesToCoffee.toFixed(2))}`));
+    console.log(chalk.magenta(`Tokens/s: ${chalk.green(tokensPerSecond.toFixed(2))}`));
+    console.log(chalk.blue(`TTC (Time to Coffee): ${chalk.green(timesToCoffee.toFixed(2))} requests`));
     console.log(chalk.blue.bold("-------------------------------------------\n"));
 }
 
