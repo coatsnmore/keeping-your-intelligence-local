@@ -76,7 +76,7 @@ npm run cats llava
 npm run function tinyllama
 
 # test structured output
-npm run structured
+npm run structured tinyllama
 
 # test embeddings
 npm run embed
