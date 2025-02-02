@@ -1,2 +1,4 @@
 import datetime
-print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+local_time = datetime.datetime.now()
+print(local_time.strftime('%Y-%m-%d %H:%M:%S'))

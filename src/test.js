@@ -5,6 +5,7 @@ import { checkModelArgument, makeOllamaRequest, printResults } from './utils.js'
 const model = checkModelArgument();
 
 async function runTest() {
+    
     const payload = {
         model: model,
         stream: false,

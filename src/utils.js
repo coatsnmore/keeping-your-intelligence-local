@@ -2,6 +2,13 @@
 
 import fetch from 'node-fetch';
 import chalk from 'chalk';
+import fs from 'fs/promises';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
+const OLLAMA_ENDPOINT = process.env.OLLAMA_ENDPOINT || 'http://localhost:11434';
 
 export function checkModelArgument() {
     const model = process.argv[2];
@@ -13,7 +20,6 @@ export function checkModelArgument() {
 }
 
 export async function makeOllamaRequest(payload, endpoint = '/api/generate') {
-    const OLLAMA_ENDPOINT = 'http://localhost:11434';
     const start = Date.now();
 
     try {
@@ -33,7 +39,7 @@ export async function makeOllamaRequest(payload, endpoint = '/api/generate') {
 }
 
 export function printResults(data, elapsedTime) {
-    const eval_count = data.eval_count || 0;
+    const eval_count = data.eval_count || data.prompt_eval_count || 0;
     const prompt_eval_count = data.prompt_eval_count || 0;
     
     // Calculate tokens per second
@@ -49,4 +55,39 @@ export function printResults(data, elapsedTime) {
     console.log(chalk.magenta(`Tokens/s: ${chalk.green(calculationResult.toFixed(2))}`));
     console.log(chalk.blue(`TTC (Time to Coffee): ${chalk.green(timesToCoffee.toFixed(2))}`));
     console.log(chalk.blue.bold("-------------------------------------------\n"));
+}
+
+export async function readJsonRequest(filepath) {
+    try {
+        const data = await fs.readFile(filepath, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error(chalk.red(`Failed to read request file: ${filepath}`), error);
+        process.exit(1);
+    }
+}
+
+export async function readResourceFile(filepath) {
+    try {
+        return await fs.readFile(filepath, 'utf-8');
+    } catch (error) {
+        console.error(chalk.red(`Failed to read resource file: ${filepath}`), error);
+        process.exit(1);
+    }
+}
+
+export function createRequestHandler(processRequest) {
+    return async function() {
+        try {
+            await processRequest();
+        } catch (error) {
+            console.error(chalk.red('Error:'), error);
+            process.exit(1);
+        }
+    };
+}
+
+export function logResponse(description, data) {
+    console.log(chalk.blue.bold(`\n${description}:`));
+    console.log(data);
 } 
