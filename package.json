@@ -1,0 +1,30 @@
+{
+  "name": "ollama-test",
+  "version": "1.0.0",
+  "description": "Test script for Ollama API",
+  "main": "src/test.js",
+  "scripts": {
+    "test": "node src/test.js",
+    "start": "node src/test.js",
+    "cats": "node src/cats.js",
+    "function": "node src/function-calling.js",
+    "inspect": "node src/inspect.js",
+    "load": "node src/load-model.js",
+    "structured": "node src/structured.js",
+    "code": "node src/code.js",
+    "embed": "node src/embed.js"
+  },
+  "keywords": [
+    "ollama",
+    "api",
+    "test"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "dotenv": "^16.4.7",
+    "node-fetch": "^3.3.0"
+  },
+  "type": "module"
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Embed
+  type: http
+  seq: 13
+}
+
+post {
+  url: http://localhost:11434/api/embeddings
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "model": "all-minilm",
+      "prompt": "whatever",
+      "stream": false
+  }
+}
