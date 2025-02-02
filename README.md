@@ -2,11 +2,36 @@
 
 ## Preprequisites
 
-* Command Line Tools (only if you don't use Docker): `jq`, `bc`, `git`, `base64`
+* Command Line Tools (only if you don't use Docker): `jq`, `bc`, `git`, `base64`, `node`, `curl`
 * Docker Engine (or Podman)
 * Docker Compose or equivalent client (e.g. `docker-compose`, `podman`)
 * Docker Socket access (only worry about this if something breaks - OpenWebUI assumes socket access by default)
 * general HTTP egress acccess (fetches model and container binaries)
+
+## Project Structure
+
+```
+.
+├── collections/     # Bruno API collections for testing
+├── models/         # Modelfiles for custom models
+├── requests/       # JSON request templates
+│   ├── function-calling.json    # Function calling examples
+│   └── structured-request.json  # Structured output examples
+├── resources/      # Static resources
+│   ├── cats.base64             # Test image for vision models
+│   ├── cats.jpeg              # Original test image
+│   └── technical-documentation.md  # Test document for embeddings
+└── src/           # Node.js test scripts
+    ├── cats.js         # Vision model testing
+    ├── code.js         # Code generation testing
+    ├── embed.js        # Embedding generation
+    ├── function-calling.js  # Function calling tests
+    ├── inspect.js      # Model inspection
+    ├── load-model.js   # Model loading utility
+    ├── structured.js   # Structured output testing
+    ├── test.js         # Basic generation testing
+    └── utils.js        # Shared utilities
+```
 
 ## Clone the Repo
 
@@ -31,66 +56,37 @@ docker exec -it intelligence /bin/bash
 # docker compose down
 ```
 
-## Boostrap Ollama with tinyllama
+## Available Scripts
+
+Run these scripts from within the intelligence container:
 
 ```bash
-# request Ollama to pull down model
-./load-model.sh tinyllama
+# load the models
+npm run load tinyllama
+npm run load llava
+npm run load all-minilm
+
+# test the model
+npm run test tinyllama
+
+# test image recognition
+npm run cats llava
+
+# test function calling
+npm run function tinyllama
+
+# test structured output
+npm run structured
+
+# test embeddings
+npm run embed
 ```
 
-## Test Basic Text Prompt against Ollama serving a Tiny Model
-```bash
-# run a prompt against tinyllama
-./test.sh tinyllama
-```
 
-## (Optional) Test a Slightly More Capable Model
-
-```bash
-# load llama3
-./load-model.sh llama3.2:1b
-
-# test llama3
-./test.sh llama3.2:1b
-```
-
-## Test Vision Model
-
-```bash
-# load a vision model
-./load-model.sh llava
-
-# let's look at some cats
-./cats.sh
-```
-
-## Structured Output for Function Calling
-
-```bash
-# get some valid JSON
-./structured.sh
-
-# inspect the request payload
-cat structured-request.json
-```
-
-## Embeddings
-
-```bash
-# load the embedding model
-./load-model.sh all-minilm
-
-# create an embedding from a local file
-./embed.sh
-```
-## Test out Open Web UI
+## Open Web UI
 
 1. Open the Open Web UI application in your browser at [`http://localhost:3000`](http://localhost:3000)
 1. Sign up an account. This stays local, but use credentials you don't care about. Use `admin@admin.com/admin`
-
-##  Reasoning Test
-
-"Please add a pair of parentheses to the incorrect equation: 1 + 2 * 3 + 4 * 5 + 6 * 7 + 8 * 9 = 479, to make the equation true."
 
 ## References
 
