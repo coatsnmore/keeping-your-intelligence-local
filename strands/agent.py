@@ -1,38 +1,43 @@
 from strands import Agent
 from strands.models.ollama import OllamaModel
+from strands_tools.calculator import calculator
 from strands_tools.file_read import file_read
+from strands_tools.file_write import file_write
 import os
 import speech_recognition as sr
 import threading
+from strands.models.openai import OpenAIModel
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Create an Ollama model instance
-ollama_model = OllamaModel(
-    host="http://localhost:11434",  # Ollama server address
-    model_id="llama2:7b"               # Specify which model to use
+# ollama_model = OllamaModel(
+#     host="http://localhost:11434",  # Ollama server address
+#     model_id="qwen3:1.7b"               # Specify which model to use
+# )
+
+# agent = Agent(
+#     model=ollama_model,
+#     tools=[file_read, file_write, calculator],
+#     system_prompt="You are a personal AWS (Amazon Web Services) Strands agent running on a host machine named Adena. You have access to specific tools and general knowledge. You have access to the following tool(s): `file_read`, `file_write`, `calculator`. You can use these tools to assist the user. Reply concisely and to the point."
+# )
+
+openai_model = OpenAIModel(
+    client_args={
+        "api_key": os.getenv("OPENAI_API_KEY"),
+    },
+    # **model_config
+    model_id="gpt-4o-mini",
+    params={
+        "max_tokens": 1000,
+        "temperature": 0.7,
+    }
 )
 
-# Create an agent using the Ollama model
-# Restrict file_read tool to the repo folder only
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-
-def file_read_repo_only(tool_use, **kwargs):
-    # Only allow reading files within the repo root
-    input_path = tool_use.get('input', {}).get('path', '')
-    # Support wildcards and relative paths
-    abs_paths = [os.path.abspath(os.path.join(REPO_ROOT, p.strip())) for p in input_path.split(',')]
-    for abs_path in abs_paths:
-        if not abs_path.startswith(REPO_ROOT):
-            return {
-                'toolUseId': tool_use.get('file_read_repo_only', '1234567890'),
-                'status': 'error',
-                'content': [{'text': 'Access denied: Only files within the repo folder can be read.'}],
-            }
-    return file_read(tool_use, **kwargs)
-
 agent = Agent(
-    model=ollama_model,
-    tools=[file_read],
-    system_prompt="You are a personal AWS (Amazon Web Services) Strands agent running on a host machine named Adena. You have access to specific tools and general knowledge. You have access to the following tool(s): `file_read`. You can use these tools to assist the user. Reply concisely and to the point."
+    model=openai_model,
+    tools=[file_read, file_write, calculator]
 )
 
 def listen_and_transcribe():
