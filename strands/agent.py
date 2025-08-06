@@ -1,8 +1,10 @@
-from strands import Agent
+from strands import Agent, tool
 from strands.models.ollama import OllamaModel
-from strands_tools.calculator import calculator
-from strands_tools.file_read import file_read
-from strands_tools.file_write import file_write
+from strands_tools import calculator
+from strands_tools import file_read
+from strands_tools import file_write
+# from strands_tools.browser import LocalChromiumBrowser
+
 import os
 import speech_recognition as sr
 import threading
@@ -11,34 +13,55 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# browser = LocalChromiumBrowser()
+@tool
+def get_user_location() -> str:
+    """Get the user's location."""
+
+    # Implement user location lookup logic here
+    return "Seattle, USA"
+
+
+@tool
+def weather(location: str) -> str:
+    """Get weather information for a location.
+
+    Args:
+        location: City or location name
+    """
+
+    # Implement weather lookup logic here
+    return f"Weather for {location}: Sunny, 72°F"
+
 # Create an Ollama model instance
-# ollama_model = OllamaModel(
-#     host="http://localhost:11434",  # Ollama server address
-#     model_id="qwen3:1.7b"               # Specify which model to use
-# )
-
-# agent = Agent(
-#     model=ollama_model,
-#     tools=[file_read, file_write, calculator],
-#     system_prompt="You are a personal AWS (Amazon Web Services) Strands agent running on a host machine named Adena. You have access to specific tools and general knowledge. You have access to the following tool(s): `file_read`, `file_write`, `calculator`. You can use these tools to assist the user. Reply concisely and to the point."
-# )
-
-openai_model = OpenAIModel(
-    client_args={
-        "api_key": os.getenv("OPENAI_API_KEY"),
-    },
-    # **model_config
-    model_id="gpt-4o-mini",
-    params={
-        "max_tokens": 1000,
-        "temperature": 0.7,
-    }
+ollama_model = OllamaModel(
+    host="http://localhost:11434",  # Ollama server address
+    model_id="gpt-oss:20b"               # Specify which model to use
 )
 
 agent = Agent(
-    model=openai_model,
-    tools=[file_read, file_write, calculator]
+    model=ollama_model,
+    tools=[get_user_location,weather]
+    # tools=[browser.browser]
+    # system_prompt="You are a personal AWS (Amazon Web Services) Strands agent running on a host machine named Adena. You have access to specific tools and general knowledge. You have access to the following tool(s): `file_read`, `file_write`, `calculator`. You can use these tools to assist the user. Reply concisely and to the point."
 )
+
+# openai_model = OpenAIModel(
+#     client_args={
+#         "api_key": os.getenv("OPENAI_API_KEY"),
+#     },
+#     # **model_config
+#     model_id="gpt-4o-mini",
+#     params={
+#         "max_tokens": 1000,
+#         "temperature": 0.7,
+#     }
+# )
+
+# agent = Agent(
+#     model=openai_model,
+#     tools=[file_read, file_write, calculator]
+# )
 
 def listen_and_transcribe():
     recognizer = sr.Recognizer()
@@ -81,6 +104,7 @@ def interactive_agent():
     print("Type 'quit', 'exit', or 'bye' to end the session")
     print("Type 'voice' to use your microphone")
     print("-" * 50)
+    agent("Tell me what tools you have access to.")
     
     while True:
         try:

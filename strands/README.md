@@ -21,4 +21,10 @@ tool=<<function file_write at 0x0000014852637F60>> | unrecognized tool specifica
 🤖 Interactive Agent Loop
 Type 'quit', 'exit', or 'bye'
 
-* 
+* qwen3:8b
+
+TBD
+
+* gpt-oss:20b
+
+everyhing works!!!  but is slow
