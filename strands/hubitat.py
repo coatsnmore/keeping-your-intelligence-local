@@ -5,6 +5,7 @@ from strands_tools import file_read
 from strands_tools import file_write
 from strands_tools.mcp_client import MCPClient
 from mcp import stdio_client, StdioServerParameters
+from mcp.client.sse import sse_client
 # from strands_tools.browser import LocalChromiumBrowser
 
 import os
@@ -14,35 +15,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# For Windows - Spotify MCP Server:
-spotify_mcp_client = MCPClient(lambda: stdio_client(
-    StdioServerParameters(
-        command="uv", 
-        args=[
-            "run", 
-            "--directory", 
-            "C:\\devl\\spotify-mcp", 
-            "spotify-mcp"
-        ],
-        env={
-            **os.environ,  # Include all current env vars
-            'SPOTIFY_CLIENT_ID': os.getenv('SPOTIFY_CLIENT_ID'),
-            'SPOTIFY_CLIENT_SECRET': os.getenv('SPOTIFY_CLIENT_SECRET'),
-            'SPOTIFY_REDIRECT_URI': os.getenv('SPOTIFY_REDIRECT_URI'),
-            'SPOTIPY_CLIENT_ID': os.getenv('SPOTIPY_CLIENT_ID'),
-            'SPOTIPY_CLIENT_SECRET': os.getenv('SPOTIPY_CLIENT_SECRET')
-        }
-    )
-))
+# For Windows - Spotify MCP Server:# Connect to an MCP server using SSE transport
+hubitat_mcp_client = MCPClient(lambda: sse_client("http://localhost:8000/sse"))
+
+# # Create an agent with MCP tools
+# with hubitat_mcp_client:
+#     # Get the tools from the MCP server
+#     tools = hubitat_mcp_client.list_tools_sync()
 # Create an OpenRouter model instance
 openrouter_model = OpenAIModel(
+    # client_args={
+    #     "api_key": os.getenv("OPENROUTER_KEY"),
+    #     "base_url": "https://openrouter.ai/api/v1",
+    # },
     client_args={
-        "api_key": os.getenv("OPENROUTER_KEY"),
-        "base_url": "https://openrouter.ai/api/v1",
+        "api_key": os.getenv("OPENAI_API_KEY")
     },
     # model_id="openai/gpt-oss-20b:free",  
+    model_id="gpt-4o-mini",
     # model_id="z-ai/glm-4.5-air:free",  #
-    model_id="qwen/qwen3-coder:free",
+    # model_id="qwen/qwen3-coder:free",
     # model_id="moonshotai/kimi-vl-a3b-thinking:free", # You can change this to any OpenRouter model
     params={
         "max_tokens": 1000,
@@ -92,9 +84,9 @@ def interactive_agent():
     print("Type 'voice' to use your microphone")
     print("-" * 50)
    
-    with spotify_mcp_client:
+    with hubitat_mcp_client:
         # Get the tools from the MCP server
-        tools = spotify_mcp_client.list_tools_sync()
+        tools = hubitat_mcp_client.list_tools_sync()
 
         agent = Agent(
             model=openrouter_model,
