@@ -29,6 +29,50 @@ def list_devices():
 
     return json.dumps(devices)
 
+@mcp.tool(description="Check Specific Device Details")
+def device_details(device_id):
+    """Return a the details for a specific device"""
+    url = f"{HUBITAT_BASE_URL}/devices/{device_id}?access_token={HUBITAT_TOKEN}"
+    r = requests.get(url)
+    device_details = r.json()
+
+    print(f"Device '{device_id}': {device_details}")
+
+    return json.dumps(device_details)
+
+@mcp.tool(description="Check Event History for a Specific Device")
+def device_history(device_id):
+    """Return a the details for a specific device"""
+    url = f"{HUBITAT_BASE_URL}/devices/{device_id}/events?access_token={HUBITAT_TOKEN}"
+    r = requests.get(url)
+    events = r.json()
+
+    print(f"Device '{device_id}' Events: {events}")
+
+    return json.dumps(events)
+
+@mcp.tool(description="Get Capabilities for a Specific Device")
+def device_capabilities(device_id):
+    """Return a the details for a specific device"""
+    url = f"{HUBITAT_BASE_URL}/devices/{device_id}/capabilities?access_token={HUBITAT_TOKEN}"
+    r = requests.get(url)
+    capabilities = r.json()
+
+    print(f"Device '{device_id}' Events: {capabilities}")
+
+    return json.dumps(capabilities)
+
+@mcp.tool(description="Check Commands for a Specific Device")
+def device_commands(device_id):
+    """Return a the details for a specific device"""
+    url = f"{HUBITAT_BASE_URL}/devices/{device_id}/commands?access_token={HUBITAT_TOKEN}"
+    r = requests.get(url)
+    commands = r.json()
+
+    print(f"Device '{device_id}' Commands: {commands}")
+
+    return json.dumps(commands)
+
 @mcp.tool(description="Command the Hubitat Devices")
 def control_device(device_id, command):
     """Send a command to a Hubitat device.
