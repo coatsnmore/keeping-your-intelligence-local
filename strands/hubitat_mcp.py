@@ -6,7 +6,7 @@ import requests
 
 load_dotenv()
 # Create an MCP server
-mcp = FastMCP("Calculator Server")
+mcp = FastMCP("Hubitat MCP Server")
 
 HUBITAT_BASE_URL = os.getenv("HUB_HOST")
 
