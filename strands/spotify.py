@@ -36,18 +36,17 @@ spotify_mcp_client = MCPClient(lambda: stdio_client(
 ))
 # Create an OpenRouter model instance
 openrouter_model = OpenAIModel(
-    # client_args={
-    #     "api_key": os.getenv("OPENROUTER_KEY"),
-    #     "base_url": "https://openrouter.ai/api/v1",
-    # },
     client_args={
-        "api_key": os.getenv("OPENAI_API_KEY")
+        "api_key": os.getenv("OPENROUTER_KEY"),
+        "base_url": "https://openrouter.ai/api/v1",
     },
-    # model_id="openai/gpt-oss-20b:free",  
-    model_id="gpt-4o-mini",
-    # model_id="z-ai/glm-4.5-air:free",  #
-    # model_id="qwen/qwen3-coder:free",
-    # model_id="moonshotai/kimi-vl-a3b-thinking:free", # You can change this to any OpenRouter model
+    # client_args={
+    #     "api_key": os.getenv("OPENAI_API_KEY")
+    # },
+    # model_id="openai/gpt-oss-20b:free",  # no tool use
+    # model_id="z-ai/glm-4.5-air:free",  # tool use!!!
+    model_id="qwen/qwen3-coder:free", # tool use!!!
+    # model_id="moonshotai/kimi-vl-a3b-thinking:free", # no tool use
     params={
         "max_tokens": 1000,
         "temperature": 0.7,

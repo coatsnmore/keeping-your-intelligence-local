@@ -31,7 +31,7 @@ def list_devices():
 
 @mcp.tool(description="Check Specific Device Details")
 def device_details(device_id):
-    """Return a the details for a specific device"""
+    """Return the details for a specific device"""
     url = f"{HUBITAT_BASE_URL}/devices/{device_id}?access_token={HUBITAT_TOKEN}"
     r = requests.get(url)
     device_details = r.json()
@@ -42,7 +42,7 @@ def device_details(device_id):
 
 @mcp.tool(description="Check Event History for a Specific Device")
 def device_history(device_id):
-    """Return a the details for a specific device"""
+    """Return the event history for a specific device"""
     url = f"{HUBITAT_BASE_URL}/devices/{device_id}/events?access_token={HUBITAT_TOKEN}"
     r = requests.get(url)
     events = r.json()
@@ -53,7 +53,7 @@ def device_history(device_id):
 
 @mcp.tool(description="Get Capabilities for a Specific Device")
 def device_capabilities(device_id):
-    """Return a the details for a specific device"""
+    """Return a the capabilities for a specific device"""
     url = f"{HUBITAT_BASE_URL}/devices/{device_id}/capabilities?access_token={HUBITAT_TOKEN}"
     r = requests.get(url)
     capabilities = r.json()
@@ -64,7 +64,7 @@ def device_capabilities(device_id):
 
 @mcp.tool(description="Check Commands for a Specific Device")
 def device_commands(device_id):
-    """Return a the details for a specific device"""
+    """Return a the commands for a specific device"""
     url = f"{HUBITAT_BASE_URL}/devices/{device_id}/commands?access_token={HUBITAT_TOKEN}"
     r = requests.get(url)
     commands = r.json()
