@@ -13,6 +13,7 @@ dependencies = [
     "python-dotenv",
     "SpeechRecognition",
     "PyAudio",
+    "pyttsx3",
     "mcp>=1.12.3",
     "requests>=2.32.4",
 ]
