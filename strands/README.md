@@ -1,3 +1,14 @@
+# Install
+
+Install uv. On Mac, you will need to install PortAudio via `brew install portaudio`.
+
+```bash
+uv venv
+source .venv/bin/activate
+uv sync --all-packages
+```
+
+
 # Tool Use
 For tool use, tried:
 

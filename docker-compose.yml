@@ -39,13 +39,13 @@ services:
       - serve
     deploy:
       resources:
-        # limits:
-        #   memory: 4g
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+        limits:
+          memory: 64g
+        # reservations:
+        #   devices:
+        #     - driver: nvidia
+        #       count: all
+        #       capabilities: [gpu]
     restart: unless-stopped
   intelligence:
     build:
@@ -59,7 +59,7 @@ services:
       - ollama-network
     volumes:
       # - .:/app
-      - /c/devl/keeping-your-intelligence-local:/app
+      - ~/devl/keeping-your-intelligence-local:/app
       # - /app/node_modules     # Prevent overwriting node_modules (if using Node.js)
     # ports:
     #   - "3000:3000"           # Expose a port (e.g., for a web server or API)
